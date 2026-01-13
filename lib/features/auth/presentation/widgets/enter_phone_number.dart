@@ -6,14 +6,14 @@ import 'package:super_app/core/utils/custom_button.dart';
 import 'package:super_app/core/utils/custom_text_field.dart';
 import 'package:super_app/core/utils/sized_box_extension.dart';
 
-class LoginBody extends StatefulWidget {
-  const LoginBody({super.key});
+class EnterPhoneNumber extends StatefulWidget {
+  const EnterPhoneNumber({super.key});
 
   @override
-  State<LoginBody> createState() => _LoginBodyState();
+  State<EnterPhoneNumber> createState() => _EnterPhoneNumberState();
 }
 
-class _LoginBodyState extends State<LoginBody> {
+class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
   final TextEditingController _phoneController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Color _buttonColor = AppColors.disabledColor;

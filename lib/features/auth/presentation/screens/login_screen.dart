@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_app/core/utils/sized_box_extension.dart';
-import 'package:super_app/features/auth/presentation/widgets/login_body.dart';
+import 'package:super_app/features/auth/presentation/widgets/enter_phone_number.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [80.height, LoginBody()],
+          children: [80.height, EnterPhoneNumber()],
         ),
       ),
     );
