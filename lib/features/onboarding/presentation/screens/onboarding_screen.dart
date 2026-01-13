@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:super_app/core/routes/app_routes.dart';
 import 'package:super_app/core/styles/app_colors.dart';
 import 'package:super_app/core/styles/app_styles.dart';
 import 'package:super_app/features/onboarding/presentation/widgets/onboaring_body.dart';
@@ -129,9 +131,14 @@ class _OnboardingTextAnimationState extends State<OnboardingTextAnimation>
                     child: SafeArea(
                       child: Opacity(
                         opacity: containerOpacity.value,
-                        child: Text(
-                          'Пропустить',
-                          style: AppStyles.wight400Size16,
+                        child: GestureDetector(
+                          onTap: () {
+                            context.pushNamed(AppRoutes.login);
+                          },
+                          child: Text(
+                            'Пропустить',
+                            style: AppStyles.wight400Size16,
+                          ),
                         ),
                       ),
                     ),
