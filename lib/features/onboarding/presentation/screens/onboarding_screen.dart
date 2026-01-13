@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:super_app/core/styles/app_colors.dart';
+import 'package:super_app/core/styles/app_styles.dart';
+import 'package:super_app/features/onboarding/presentation/widgets/onboaring_body.dart';
 
 class OnboardingTextAnimation extends StatefulWidget {
   const OnboardingTextAnimation({super.key});
@@ -61,80 +64,81 @@ class _OnboardingTextAnimationState extends State<OnboardingTextAnimation>
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      body: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, _) {
-          return Stack(
-            children: [
-              /// الكلمات
-              Positioned(
-                top: height * wordsGroupY.value,
-                left: 0,
-                right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Супер',
-                      style: TextStyle(
-                        fontSize: 65,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final height = constraints.maxHeight;
 
-                    // a word that comes from the bottom
-                    Transform.translate(
-                      offset: Offset(0, height * (word1Y.value - 0.4)),
-                      child: const Text(
-                        'Ап',
-                        style: TextStyle(
-                          fontSize: 65,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
+          return AnimatedBuilder(
+            animation: _controller,
+            builder: (context, _) {
+              return Stack(
+                children: [
+                  /// الكلمات
+                  Positioned(
+                    top: height * wordsGroupY.value,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Супер',
+                          style: TextStyle(
+                            fontSize: 65,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.primary,
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 12),
+                        Transform.translate(
+                          offset: Offset(0, height * (word1Y.value - 0.4)),
+                          child: const Text(
+                            'Ап',
+                            style: TextStyle(
+                              fontSize: 65,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
+                  ),
 
-              Positioned(
-                top: height * 0.6,
-                left: 24,
-                right: 24,
-                child: Opacity(
-                  opacity: containerOpacity.value,
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'ده الكونتينر',
-                        style: TextStyle(fontSize: 18),
+                  /// الكونتينر
+                  Positioned(
+                    top: height * 0.5,
+                    left: 0,
+                    right: 0,
+                    child: Opacity(
+                      opacity: containerOpacity.value,
+                      child: Container(
+                        height: 379.h,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundGray,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: const Center(child: OnboaringBody()),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Positioned(
-                top: 40,
-                child: IconButton(
-                  onPressed: () {
-                    _controller.reset();
-                    _controller.forward();
-                  },
-                  icon: const Icon(Icons.repeat),
-                ),
-              ),
-            ],
+                  Positioned(
+                    top: 18.h,
+                    right: 24.w,
+                    child: SafeArea(
+                      child: Opacity(
+                        opacity: containerOpacity.value,
+                        child: Text(
+                          'Пропустить',
+                          style: AppStyles.wight400Size16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           );
         },
       ),
