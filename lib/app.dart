@@ -14,6 +14,15 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Super App',
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            elevation: 0,
+          ),
+        ),
         routerConfig: ConfigRoutes.routerConfig,
       ),
     );

@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:super_app/core/styles/app_colors.dart';
 import 'package:super_app/core/styles/app_styles.dart';
+import 'package:super_app/features/onboarding/data/onboarding_data.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class OnboardingButton extends StatelessWidget {
+  const OnboardingButton({
     super.key,
+    required OnboardingData data,
+    required int currentPage,
     this.onPressed,
-    required this.text,
-    required this.backgroundColor,
-    required this.textColor,
-  });
+  }) : _data = data,
+       _currentPage = currentPage;
   final void Function()? onPressed;
-  final String text;
-  final Color textColor, backgroundColor;
+  final OnboardingData _data;
+  final int _currentPage;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +24,14 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          disabledBackgroundColor: AppColors.disabledColor,
+          backgroundColor: AppColors.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.r),
           ),
         ),
         child: Text(
-          text,
-          style: AppStyles.wight600Size16.copyWith(color: textColor),
+          _data.buttonTitles[_currentPage],
+          style: AppStyles.wight600Size16,
         ),
       ),
     );

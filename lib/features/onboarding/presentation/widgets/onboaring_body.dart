@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:super_app/core/routes/app_routes.dart';
 import 'package:super_app/core/styles/app_colors.dart';
 import 'package:super_app/core/styles/app_styles.dart';
-import 'package:super_app/core/utils/custom_button.dart';
+import 'package:super_app/features/onboarding/presentation/widgets/onboarding_button.dart';
 import 'package:super_app/features/onboarding/data/onboarding_data.dart';
 
 class OnboaringBody extends StatefulWidget {
@@ -81,7 +81,7 @@ class _OnboaringBodyState extends State<OnboaringBody> {
             padding: EdgeInsets.symmetric(horizontal: 28.w),
             child: Column(
               children: [
-                CustomButton(
+                OnboardingButton(
                   data: _data,
                   currentPage: _currentPage,
                   onPressed: _onNextButtonPressed,
