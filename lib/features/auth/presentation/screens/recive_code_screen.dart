@@ -71,12 +71,7 @@ class _ReciveCodeScreenState extends State<ReciveCodeScreen> {
                 CustomTextField(
                   keyboardType: TextInputType.phone,
                   controller: _codeController,
-                  validator: (value) {
-                    if (value != 1111) {
-                      return null;
-                    }
-                    return null;
-                  },
+
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(4),

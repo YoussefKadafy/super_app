@@ -61,7 +61,13 @@ class _OnboardingTextAnimationState extends State<OnboardingTextAnimation>
       TweenSequenceItem(tween: Tween(begin: 0.0, end: 1.0), weight: 30),
     ]).animate(_controller);
 
-    _controller.forward();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 300), () {
+        if (mounted) {
+          _controller.forward();
+        }
+      });
+    });
   }
 
   @override
