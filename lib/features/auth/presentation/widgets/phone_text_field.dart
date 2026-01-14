@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:super_app/core/styles/app_colors.dart';
 import 'package:super_app/core/styles/app_styles.dart';
 
-class CustomTextField extends StatefulWidget {
+class PhoneTextField extends StatefulWidget {
   final TextEditingController? controller;
   final String? hintText;
   final String? labelText;
@@ -14,9 +14,8 @@ class CustomTextField extends StatefulWidget {
   final void Function(String)? onChanged;
   final int? maxLines;
   final bool enabled;
-  final List<TextInputFormatter>? inputFormatters;
 
-  const CustomTextField({
+  const PhoneTextField({
     super.key,
     this.controller,
     this.hintText,
@@ -27,14 +26,13 @@ class CustomTextField extends StatefulWidget {
     this.onChanged,
     this.maxLines = 1,
     this.enabled = true,
-    this.inputFormatters,
   });
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<PhoneTextField> createState() => _PhoneTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _PhoneTextFieldState extends State<PhoneTextField> {
   late final TextEditingController _controller;
   late final FocusNode _focusNode;
 
@@ -43,6 +41,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
     super.initState();
     _controller = widget.controller ?? TextEditingController();
     _focusNode = FocusNode();
+    _controller.addListener(() => setState(() {}));
+    _focusNode.addListener(() => setState(() {}));
   }
 
   @override
@@ -54,28 +54,48 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isEmpty = _controller.text.isEmpty;
+    final bool isFocused = _focusNode.hasFocus;
+
     return TextFormField(
       controller: _controller,
       focusNode: _focusNode,
-      keyboardType: widget.keyboardType,
+      keyboardType: widget.keyboardType ?? TextInputType.phone,
       validator: widget.validator,
       onChanged: widget.onChanged,
+      enableInteractiveSelection: false,
       enabled: widget.enabled,
-      obscureText: widget.obscureText,
-      maxLines: widget.maxLines,
       cursorColor: Colors.black,
       cursorWidth: 1.5.w,
+      maxLines: widget.maxLines,
       style: AppStyles.wight600Size16,
-      inputFormatters: widget.inputFormatters,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(10),
+      ],
 
       decoration: InputDecoration(
         labelText: widget.labelText,
-        hintText: widget.hintText,
+
+        /// 🔹 Prefix logic
+        prefix: (_controller.text.isNotEmpty || isFocused)
+            ? Text(
+                '+',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: (isEmpty) ? Colors.grey[400] : Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
+            : null,
+
+        hintText: !isFocused ? '+7' : null,
         hintStyle: TextStyle(fontSize: 16.sp, color: Colors.grey[400]),
         labelStyle: TextStyle(fontSize: 14.sp, color: AppColors.primary),
+
         filled: true,
         fillColor: Colors.white,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+        contentPadding: EdgeInsets.only(left: 16.w),
 
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),

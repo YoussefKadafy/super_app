@@ -26,6 +26,18 @@ class AppStyles {
   );
 
   ///Styles with numberd names
+
+  static const TextStyle wight400Size14 = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Colors.black,
+  );
+
+  static const TextStyle wight500Size14 = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Colors.black,
+  );
   static const TextStyle wight400Size16 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
@@ -41,6 +53,17 @@ class AppStyles {
   static const TextStyle wight700Size16 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
+  static const TextStyle wight400Size18 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: Colors.black,
+  );
+
+  static const TextStyle wight600Size18 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
     color: Colors.black,
   );
 
